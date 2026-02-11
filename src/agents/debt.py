@@ -15,11 +15,11 @@ class DebtAgent(BaseAgent):
         try:
             debt_info = DebtAgentSchema(**raw_data)
             if debt_info.is_valid_commitment():
-                return debt_info
+                return debt_info.model_dump()
 
             return None
         except Exception as e:
-            raise ValidationError(f"Error al validar los datos: {e}")
+            raise Exception(f"Error al validar los datos: {e}")
 
     def _process_action(self, validated_data: Dict[str, Any], parsed_response: Dict[str, Any]) -> None:
         try:
@@ -29,4 +29,4 @@ class DebtAgent(BaseAgent):
                 parsed_data=parsed_response
             )
         except Exception as e:
-            raise requests.exceptions.RequestException(f"Error al hacer la petición: {e}")
+            raise Exception(f"Error al hacer la petición: {e}")

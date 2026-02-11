@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Dict, Any, Optional
 
 
 class BaseAgent(ABC):
@@ -14,7 +15,7 @@ class BaseAgent(ABC):
     def _validate_normalize(self, raw_data: Dict[str, Any]) -> Optional[Any]:
         pass
 
-     @abstractmethod
+    @abstractmethod
     def _process_action(self, validated_data: Dict[str, Any], parsed_response: Dict[str, Any]) -> None:
         pass
 
@@ -31,7 +32,8 @@ class BaseAgent(ABC):
                 self._process_action(validated_data, parsed_response)
                 self._action_history.add(action_key)
 
-            else: 
+                
+            # ElSE
                 # TODO: error / warning logs
                 
-        return response # self.conversation_model.answer_user()
+        return validated_data # self.conversation_model.answer_user()

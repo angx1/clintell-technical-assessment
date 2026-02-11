@@ -15,11 +15,11 @@ class AssistantAgent(BaseAgent):
         try:
             assistant_info = AssistantAgentSchema(**raw_data)
             if assistant_info.is_valid_request():
-                return assistant_info
+                return assistant_info.model_dump()
 
             return None
-        except ValidationError as e:
-            # TODO: error logsw
+        except Exception as e:
+            raise Exception(f"Error al validar los datos: {e}")
 
     def _process_action(self, validated_data: Dict[str, Any], parsed_response: Dict[str, Any]) -> None:
         try:
@@ -28,5 +28,5 @@ class AssistantAgent(BaseAgent):
                 body=validated_data,
                 parsed_data=parsed_response
             )
-        except requests.exceptions.RequestException as e:
-            # TODO: error logs
+        except Exception as e:
+            raise Exception(f"Error al hacer la petición: {e}")

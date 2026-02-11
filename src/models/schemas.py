@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from pydantic import BaseModel, Field, field_validator, ValidationError
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 import re
 
@@ -16,10 +16,10 @@ class DebtAgentSchema(BaseModel):
         try:
             v_parsed = datetime.strptime(v, '%Y-%m-%d').date() # format yyyy-mm-dd
         except ValueError:
-            raise ValidationError('Fecha inválida (mes 1-12, día válido para el mes)')
+            raise Exception('Fecha inválida (mes 1-12, día válido para el mes)')
 
         if v_parsed <= date.today(): # al ser commitment debe ser posterior a hoy
-            raise ValidationError('La fecha debe ser posterior a hoy')
+            raise Exception('La fecha debe ser posterior a hoy')
 
         return v
 
@@ -37,7 +37,7 @@ class AssistantAgentSchema(BaseModel):
         if v is None:
             return None
         if len(v) > 1000: # max length of request para control de tokens
-            raise ValidationError('La solicitud no puede tener más de 1000 caracteres')
+            raise Exception('La solicitud no puede tener más de 1000 caracteres')
         return v
     
     def is_valid_request(self) -> bool:
