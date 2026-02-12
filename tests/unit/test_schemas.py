@@ -7,20 +7,20 @@ import re
 
 def test_debt_agent_schema_valid_commitment():
     commitment_date = (date.today() + timedelta(days=1)).strftime('%Y-%m-%d')
-    commitment_amount = 100.00
+    committed_amount = 100.00
 
-    schema = DebtAgentSchema(commitment_date=commitment_date, commitment_amount=commitment_amount)
+    schema = DebtAgentSchema(commitment_date=commitment_date, committed_amount=committed_amount)
 
     assert schema.commitment_date == commitment_date
-    assert schema.commitment_amount == commitment_amount
+    assert schema.committed_amount == committed_amount
     assert schema.is_valid_commitment() is True
 
 
 def test_debt_agent_schema_invalid_commitment():
-    schema = DebtAgentSchema(commitment_date=None, commitment_amount=None)
+    schema = DebtAgentSchema(commitment_date=None, committed_amount=None)
 
     assert schema.commitment_date is None
-    assert schema.commitment_amount is None
+    assert schema.committed_amount is None
     assert schema.is_valid_commitment() is False
 
 
@@ -28,14 +28,14 @@ def test_debt_agent_schema_past_date_raises_error():
     with pytest.raises(Exception, match="La fecha debe ser posterior a hoy"):
         DebtAgentSchema(
             commitment_date=(date.today() - timedelta(days=1)).strftime('%Y-%m-%d'),
-            commitment_amount=100
+            committed_amount=100
         )
 
 def test_debt_agent_schema_today_date_raises_error():
     with pytest.raises(Exception, match="La fecha debe ser posterior a hoy"):
         DebtAgentSchema(
             commitment_date=(date.today()).strftime('%Y-%m-%d'),
-            commitment_amount=100
+            committed_amount=100
         )
 
 
@@ -43,7 +43,7 @@ def test_debt_agent_schema_negative_amount_raises_error():
     with pytest.raises(Exception, match="El importe debe ser mayor a 0"):
         DebtAgentSchema(
             commitment_date=(date.today() + timedelta(days=1)).strftime('%Y-%m-%d'),
-            commitment_amount=-100
+            committed_amount=-100
         )
 
 
@@ -51,7 +51,7 @@ def test_debt_agent_schema_0_amount_raises_error():
     with pytest.raises(Exception, match="El importe debe ser mayor a 0"):
         DebtAgentSchema(
             commitment_date=(date.today() + timedelta(days=1)).strftime('%Y-%m-%d'),
-            commitment_amount=0
+            committed_amount=0
         )
 
 
@@ -59,7 +59,7 @@ def test_debt_agent_schema_invalid_date_format_raises_error():
     with pytest.raises(Exception, match="Fecha inválida"):
         DebtAgentSchema(
             commitment_date="2026-13-01",
-            commitment_amount=100
+            committed_amount=100
         )
 
 
