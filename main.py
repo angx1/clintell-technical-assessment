@@ -1,7 +1,7 @@
 from src.models.mocks import ConversationModel, ParserModel
 from src.agents.assistant import AssistantAgent
 from src.agents.debt import DebtAgent
-from src.servicies.http_client import HttpClient
+from src.services.http_client import HttpClient
 import logging
 
 
@@ -16,9 +16,9 @@ def run_debt_game_loop():
         "Sí confirmo que pagaré eso"
     ]
     parsed_sequence = [
-        {"commitment_date": None, "commitment_amount": None},
-        {"commitment_date": "2026-12-01", "commitment_amount": 150.50},
-        {"commitment_date": "2026-12-01", "commitment_amount": 150.50}
+        {"commitment_date": None, "committed_amount": None},
+        {"commitment_date": "2026-12-01", "committed_amount": 150.50},
+        {"commitment_date": "2026-12-01", "committed_amount": 150.50}
     ]
 
     conversation_model_mock = ConversationModel(user_responses)
@@ -30,7 +30,7 @@ def run_debt_game_loop():
     for i in range(len(user_responses)):
         logging.info(f"Turno {i+1} (USER input): {user_responses[i]}")
         agent_replay = agent.handle_turn()
-        logging.info(f"Turno {i+1} (AGENT inetrnal context): {agent_replay}")
+        logging.info(f"Turno {i+1} (AGENT internal context): {agent_replay}")
 
 
 def run_assistant_game_loop():

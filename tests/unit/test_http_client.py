@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from src.servicies.http_client import HttpClient
+from src.services.http_client import HttpClient
 from dotenv import load_dotenv
 import os
 

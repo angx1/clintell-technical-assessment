@@ -24,7 +24,6 @@ class BaseAgent(ABC):
     def handle_turn(self) -> str:
         response = self.conversation_model.answer_user()
         parsed_response = self.parser_model.parse_data()
-        # parsed_response = self.parser_model.parse_data(response) ? dice que lógica interna de los modelos ya se ajusta osea que se opta por no pasar response
 
         validated_data = self._validate_normalize(parsed_response)
         if validated_data:
