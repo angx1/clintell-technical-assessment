@@ -21,7 +21,7 @@ clintell-technical-assessment/
 │   │   ├── debt.py                # Clase DebtAgent
 │   │   └── assistant.py           # Clase AssistantAgent
 │   ├── models/
-│   │   ├── schemas.py             # Schemas Pydantic para Validación de Tipos
+│   │   ├── schemas.py             # Schemas Pydantic
 │   │   └── mocks.py               # Mocks ConversationModel/ParserModel
 │   └── services/
 │       └── http_client.py         # Mock Cliente HTTP
@@ -34,7 +34,7 @@ clintell-technical-assessment/
 │   │   ├── test_debt_flow.py
 │   │   └── test_assistant_flow.py
 │   └── conftest.py
-├── main.py                        # Demo ejecutable
+├── main.py                        # Demo ejecutable (gameloop simulado)
 ├── conftest.py                    # Configuración ruta base para los Tests
 ├── requirements.txt               # Dependencias proyecto
 ├── .env.example
@@ -42,6 +42,6 @@ clintell-technical-assessment/
 └── README.md
 ```
 
-#### 5. Run local demo
+#### 5. Ejecutar demo local
 
 #### 6. Tests ?? no se si incluir esto
