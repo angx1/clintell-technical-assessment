@@ -6,11 +6,11 @@ import re
 
 class DebtAgentSchema(BaseModel):
     commitment_date: Optional[str] = Field(None)
-    committed_amount: Optional[float] = Field(None)
+    commitment_amount: Optional[float] = Field(None)
 
     @field_validator('commitment_date')
     @classmethod
-    def validate_commitment(cls, v: Optional[str]) -> Optional[str]:
+    def validate_commitment_date(cls, v: Optional[str]) -> Optional[str]:
         if v is None:
             return None
         try:
@@ -20,11 +20,19 @@ class DebtAgentSchema(BaseModel):
 
         if v_parsed <= date.today(): # al ser commitment debe ser posterior a hoy
             raise Exception('La fecha debe ser posterior a hoy')
+        return v
 
+    @field_validator('commitment_amount')
+    @classmethod
+    def validate_commitment_amount(cls, v: Optional[float]) -> Optional[float]:
+        if v is None:
+            return None
+        if v <= 0: # cantidad ha de ser mayor que 0
+            raise Exception('El importe debe ser mayor a 0')
         return v
 
     def is_valid_commitment(self) -> bool:
-        return self.commitment_date is not None and self.committed_amount is not None
+        return self.commitment_date is not None and self.commitment_amount is not None 
 
 
 
