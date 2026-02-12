@@ -2,6 +2,7 @@ import os
 import json
 from typing import Dict, Any
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
 
@@ -18,9 +19,7 @@ class HttpClient:
             **parsed_data
         }
 
-        # TODO: simular logging de la petición
-        # .--
-        # -..
+        logging.info(f"POST request: {url} \n{headers} ")
         
         try:
             # response = requests.post(url, headers=headers, json=body)

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
+import logging
 
 
 class BaseAgent(ABC):
@@ -33,7 +34,7 @@ class BaseAgent(ABC):
                 self._action_history.add(action_key)
 
                 
-            # ElSE
-                # TODO: error / warning logs
+            else:
+                logging.warning(f"Action already processed: {action_key}")
                 
         return validated_data # self.conversation_model.answer_user()

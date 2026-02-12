@@ -2,9 +2,12 @@ from src.models.mocks import ConversationModel, ParserModel
 from src.agents.assistant import AssistantAgent
 from src.agents.debt import DebtAgent
 from src.servicies.http_client import HttpClient
+import logging
+
 
 def run_debt_game_loop():
-    # TODO logging inicial
+    logging.info("Starting debt game loop (DebtAgent demo)")
+
     user_responses = [
         "Hola", 
         "Pagaré 150.50 euros el 2026-12-01", 
@@ -24,14 +27,14 @@ def run_debt_game_loop():
 
     for i in range(len(user_responses)):
         agent_replay = agent.handle_turn()
-        # TODO logs de los turnos
-        # TODO logs de la respuesta del agente
-        print(f"Turno {i+1} (USER): {user_responses[i]}")
-        print(f"Turno {i+1} (AGENT): {agent_replay}")
+
+        logging.info(f"Turno {i+1} (USER): {user_responses[i]}")
+        logging.info(f"Turno {i+1} (AGENT): {agent_replay}")
 
 
 def run_assistant_game_loop():
-    #TODO logging inicial
+    logging.info("Starting assistant game loop (AssistantAgent demo)")
+    
     user_responses = ["Tengo un problema con una de mis factoras de enero"]
     parsed_sequence = [{"request": "revisión de factura de enero"}]
 
@@ -43,10 +46,9 @@ def run_assistant_game_loop():
 
     for i in range(len(user_responses)):
         agent_replay = agent.handle_turn()
-        # TODO logs de los turnos
-        # TODO logs de la respuesta del agente
-        print(f"Turno {i+1} (USER): {user_responses[i]}")
-        print(f"Turno {i+1} (AGENT): {agent_replay}")
+
+        logging.info(f"Turno {i+1} (USER): {user_responses[i]}")
+        logging.info(f"Turno {i+1} (AGENT): {agent_replay}")
 
 
 if __name__ == "__main__":
@@ -55,8 +57,7 @@ if __name__ == "__main__":
         run_assistant_game_loop()
         
     except KeyboardInterrupt:
-        print("Demo interrumpida")
-        # TODO: logging de la interrupción
+        logging.info("Demo interrumpida")
+
     except Exception as e:
-        print(f"Error: {e}")
-        # TODO: logging del error
+        logging.error(f"{e}")
