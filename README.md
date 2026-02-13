@@ -89,12 +89,16 @@ python main.py
 
 **Qué hace la demo**:
 
-La demo ejecuta dos escenarios simulados:
+La demo ejecuta dos escenarios simulados **con mocks** (con integraciones HTTP simuladas):
 
-- El primero es una simulación de la ejecución del agente `DebtAgent`, en el que se "reproduce" una conversación entre usuario-agente y se van logeando
-  los mensajes del usuario y el contexto interno (información parseada) del agente.
+- **DebtAgent**: Simula una conversación de compromiso de pago. El sistema parsea fechas
+  y montos, valida que sean correctos y "envía" la información al endpoint de deudas de ringr.
 
-- El segundo es la misma dinamica de simulación que se acaba de comentar pero para el agente `AssistantAgent`.
+- **AssistantAgent**: Simula una solicitud de asistencia. El sistema
+  valida la longitud de la solicitud y la "envía" al endpoint de asistencia de ringr.
+
+Los `ConversationModel` y `ParserModel` son mocks que simulan respuestas predefinidas de los modelos.
+El `HttpClient` loguea las peticiones POST como si las hiciese realmente.
 
 **Output esperado:**
 
