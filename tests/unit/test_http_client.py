@@ -6,6 +6,7 @@ import os
 
 load_dotenv()
 
+# U-16: Happy Path Testing
 def test_http_client_with_valid_token():
     with patch('os.getenv', return_value=os.getenv('RINGR_API_TOKEN')):
         http_client = HttpClient()
@@ -20,6 +21,7 @@ def test_http_client_with_valid_token():
     assert result["message"] == "OK"
 
 
+# U-17: Exception Testing
 def test_http_client_with_no_token_raises_error():
     with patch('os.getenv', return_value=None):
         with pytest.raises(Exception, match='No se encontró token de autenticación'):
