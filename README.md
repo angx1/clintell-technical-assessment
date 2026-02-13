@@ -9,9 +9,8 @@
 
 ### 1. Descripción general de la prueba
 
-El presente repositorio pretende ser una propuesta de solución para el problema expuesto por Clintell.
-El objetivo de la prueba era implementar un sistema de agentes conversacionales que
-a partir de las entradas del usuario extraigan información de interés y la redirijan a endpoints simulados.
+El presente repositorio pretende ser una propuesta de solución a la prueba técnica expuesto por Clintell para el puesto de Delivery Engineer / Software Developer Engineer.
+El objetivo de la prueba era implementar un sistema de agentes conversacionales que a partir de las entradas del usuario, extraigan información de interés y la redirijan a endpoints simulados.
 
 <br/>
 
