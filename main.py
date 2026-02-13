@@ -5,10 +5,10 @@ from src.services.http_client import HttpClient
 import logging
 
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
 def run_debt_game_loop():
-    logging.info("Starting debt game loop (DebtAgent demo)")
+    logging.info("Starting debt game loop (DebtAgent demo) ")
 
     user_responses = [
         "Hola", 
@@ -34,7 +34,7 @@ def run_debt_game_loop():
 
 
 def run_assistant_game_loop():
-    logging.info("\n \n Starting assistant game loop (AssistantAgent demo)")
+    logging.info("Starting assistant game loop (AssistantAgent demo)")
     
     user_responses = ["Tengo un problema con una de mis factoras de enero"]
     parsed_sequence = [{"request": "revisión de factura de enero"}]
@@ -54,6 +54,7 @@ def run_assistant_game_loop():
 if __name__ == "__main__":
     try:
         run_debt_game_loop()
+        print("\n--------------------------------\n")
         run_assistant_game_loop()
         
     except KeyboardInterrupt:

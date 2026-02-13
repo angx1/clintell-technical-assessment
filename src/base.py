@@ -29,8 +29,8 @@ class BaseAgent(ABC):
         if validated_data:
             action_key = frozenset(validated_data.items()) # clave de acción para evitar procesamiento de duplicados
             if action_key not in self._action_history:
-                self._process_action(validated_data, parsed_response)
                 self._action_history.add(action_key)
+                self._process_action(validated_data, parsed_response)
 
                 
             else:
