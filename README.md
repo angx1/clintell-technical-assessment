@@ -5,11 +5,15 @@
 
 > **SDE - 1** clintell's technical assestment
 
+---
+
 ### 1. Descripción general de la prueba
 
 El presente repositorio pretende ser una propuesta de solución para el problema expuesto por Clintell.
 El objetivo de la prueba era implementar un sistema de agentes conversacionales que
 a partir de las entradas del usuario extraigan información de interés y la redirijan a endpoints simulados.
+
+---
 
 ### 2. Diseño del sistema y decisiones técnicas
 
@@ -26,6 +30,8 @@ El sistema implementa una arquitectura organizada en 4 capas: Modelos, Agentes, 
 3. **Externalización de la Validación**: para desacoplar la validación de la información que les llega a los agentes se han implementado Schemas de validación con pydantic (Principio de Responsabilidad Única).
 
 4. **Inyección de Dependencias**: los agentes reciben `ConversationModel`, `ParserModel` y `HttpClient` por constructor, lo que facilita el testing mediante mocks y reduce el acoplamiento entre capas.
+
+---
 
 ### 3. Estructura del proyecto
 
@@ -58,6 +64,8 @@ clintell-technical-assessment/
 └── README.md
 ```
 
+---
+
 ### 5. Ejecutar demo local
 
 **Requisitos**: Python 3.10+ (versión utilizada para el desarrollo: python 3.12)
@@ -87,6 +95,8 @@ La demo ejecuta dos escenarios simulados:
   los mensajes del usuario y el contexto interno (información parseada) del agente.
 
 - El segundo es la misma dinamica de simulación que antes pero para el `AssistantAgent`.
+
+---
 
 ### 6. Tests
 
