@@ -5,7 +5,7 @@
 
 > **SDE - 1** clintell's technical assestment
 
----
+<br/>
 
 ### 1. Descripción general de la prueba
 
@@ -13,7 +13,7 @@ El presente repositorio pretende ser una propuesta de solución para el problema
 El objetivo de la prueba era implementar un sistema de agentes conversacionales que
 a partir de las entradas del usuario extraigan información de interés y la redirijan a endpoints simulados.
 
----
+<br/>
 
 ### 2. Diseño del sistema y decisiones técnicas
 
@@ -31,7 +31,7 @@ El sistema implementa una arquitectura organizada en 4 capas: Modelos, Agentes, 
 
 4. **Inyección de Dependencias**: los agentes reciben `ConversationModel`, `ParserModel` y `HttpClient` por constructor, lo que facilita el testing mediante mocks y reduce el acoplamiento entre capas.
 
----
+<br/>
 
 ### 3. Estructura del proyecto
 
@@ -64,7 +64,7 @@ clintell-technical-assessment/
 └── README.md
 ```
 
----
+<br/>
 
 ### 4. Ejecutar demo local
 
@@ -110,7 +110,7 @@ INFO - POST request to: https://api.ringr.assistance/v1/request
 INFO - Turno 1 (AGENT internal context): {'request': 'revisión de factura de enero'}
 ```
 
----
+<br/>
 
 ### 5. Tests
 
