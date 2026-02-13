@@ -102,10 +102,16 @@ El `HttpClient` loguea las peticiones POST como si las hiciese realmente.
 **Output esperado:**
 
 ```
+
 INFO - Starting assistant game loop (AssistantAgent demo)
 INFO - Turno 1 (USER input): Tengo un problema con una de mis factoras de enero
 INFO - POST request to: https://api.ringr.assistance/v1/request
 {'Authorization': 'Bearer ringr_test_token_9f3a2c1d', 'Content-Type': 'application/json', 'request': 'revisión de factura de enero'}
+INFO - response:
+            {
+                "status_code": 200,
+                "message": "OK",
+            }
 INFO - Turno 1 (AGENT internal context): {'request': 'revisión de factura de enero'}
 ```
 

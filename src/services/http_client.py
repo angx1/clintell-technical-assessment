@@ -24,7 +24,11 @@ class HttpClient:
         try:
             # response = requests.post(url, headers=headers, json=body)
             # return response
-
+            logging.info("""response: 
+            {
+                "status_code": 200,
+                "message": "OK",
+            }""")        
             return {
                 "status_code": 200,
                 "message": "OK",
