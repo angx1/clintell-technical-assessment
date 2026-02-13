@@ -5,7 +5,7 @@ from src.models.mocks import ConversationModel, ParserModel
 from datetime import date, timedelta
 
 
-
+# I-01: Happy Path Testing
 def test_debt_agent_registers_debt_with_valid_data():
     commitment_date = (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')
     committed_amount = 150.50
@@ -23,6 +23,7 @@ def test_debt_agent_registers_debt_with_valid_data():
     http_client_mock.post.assert_called_once()
 
 
+# I-02: Behavioral Testing
 def test_debt_agent_skips_debt_with_no_data():
     conversation = ConversationModel(["Hola"])
     parser = ParserModel([{"commitment_date": None, "committed_amount": None}])
@@ -34,6 +35,7 @@ def test_debt_agent_skips_debt_with_no_data():
     assert result is None
     http_client_mock.post.assert_not_called()
 
+# I-03: Exception Testing
 def test_debt_agent_skips_action_with_invalid_date():
     commitment_date = (date.today() - timedelta(days=1)).strftime('%Y-%m-%d')
     committed_amount = 150.50
@@ -49,6 +51,7 @@ def test_debt_agent_skips_action_with_invalid_date():
     
     http_client_mock.post.assert_not_called()
 
+# I-04: Exception Testing
 def test_debt_agent_skips_action_with_invalid_amount():
     commitment_date = (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')
     committed_amount = -150.50
@@ -64,6 +67,7 @@ def test_debt_agent_skips_action_with_invalid_amount():
     http_client_mock.post.assert_not_called()
 
 
+# I-05: Behavioral Testing
 def test_debt_agent_prevents_duplicate_commitments():
     commitment_date = (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')
     committed_amount = 150.50
@@ -79,6 +83,7 @@ def test_debt_agent_prevents_duplicate_commitments():
     assert http_client_mock.post.call_count == 1
 
 
+# I-06: Behavioral Testing
 def test_debt_agent_multiple_different_commitments():
     commitment_date1 = (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')
     committed_amount1 = 150.50

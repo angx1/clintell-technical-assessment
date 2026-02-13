@@ -4,6 +4,7 @@ from src.agents.assistant import AssistantAgent
 from src.models.mocks import ConversationModel, ParserModel
 
 
+# I-07: Happy Path Testing
 def test_assistant_agent_registers_request_with_valid_data():
     conversation = ConversationModel(["Tengo un problema con mi factura de enero"])
     parser = ParserModel([{"request": "Revisar factura de enero"}])
@@ -16,6 +17,7 @@ def test_assistant_agent_registers_request_with_valid_data():
     assert result["request"] == "Revisar factura de enero"
     http_client_mock.post.assert_called_once() 
 
+# I-08: Behavioral Testing
 def test_assistant_agent_skips_action_with_no_request():
     conversation = ConversationModel(["Hola"])
     parser = ParserModel([{"request": None}])
@@ -27,6 +29,7 @@ def test_assistant_agent_skips_action_with_no_request():
     assert result is None
     http_client_mock.post.assert_not_called()
 
+# I-09: Behavioral Testing
 def test_assistant_agent_prevents_duplicate_requests():
     conversation = ConversationModel(["Tengo un problema con mi factura de enero", "Tengo un problema con mi factura de enero"])
     parser = ParserModel([{"request": "Revisar factura de enero"}, {"request": "Revisar factura de enero"}])
@@ -38,6 +41,7 @@ def test_assistant_agent_prevents_duplicate_requests():
     result2 = agent.handle_turn()
     assert http_client_mock.post.call_count == 1
 
+# I-10: Behavioral Testing
 def test_assistant_agent_multiple_different_requests():
     conversation = ConversationModel(["Tengo un problema con mi factura de enero", "Necesito habalr con el proveedor de Y"])
     parser = ParserModel([{"request": "Revisar factura de enero"}, {"request": "Contactar proveedor de producto Y"}])

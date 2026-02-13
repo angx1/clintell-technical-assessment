@@ -5,6 +5,7 @@ import re
 
 # DebtAgentSchema tests .--.-
 
+# U-01: Happy Path Testing
 def test_debt_agent_schema_valid_commitment():
     commitment_date = (date.today() + timedelta(days=1)).strftime('%Y-%m-%d')
     committed_amount = 100.00
@@ -16,6 +17,7 @@ def test_debt_agent_schema_valid_commitment():
     assert schema.is_valid_commitment() is True
 
 
+# U-02: Boundary Testing
 def test_debt_agent_schema_invalid_commitment():
     schema = DebtAgentSchema(commitment_date=None, committed_amount=None)
 
@@ -24,6 +26,7 @@ def test_debt_agent_schema_invalid_commitment():
     assert schema.is_valid_commitment() is False
 
 
+# U-03: Exception Testing
 def test_debt_agent_schema_past_date_raises_error():
     with pytest.raises(Exception, match="La fecha debe ser posterior a hoy"):
         DebtAgentSchema(
@@ -31,6 +34,7 @@ def test_debt_agent_schema_past_date_raises_error():
             committed_amount=100
         )
 
+# U-04: Boundary Testing
 def test_debt_agent_schema_today_date_raises_error():
     with pytest.raises(Exception, match="La fecha debe ser posterior a hoy"):
         DebtAgentSchema(
@@ -39,6 +43,7 @@ def test_debt_agent_schema_today_date_raises_error():
         )
 
 
+# U-05: Exception Testing
 def test_debt_agent_schema_negative_amount_raises_error():
     with pytest.raises(Exception, match="El importe debe ser mayor a 0"):
         DebtAgentSchema(
@@ -47,6 +52,7 @@ def test_debt_agent_schema_negative_amount_raises_error():
         )
 
 
+# U-06: Boundary Testing
 def test_debt_agent_schema_0_amount_raises_error():
     with pytest.raises(Exception, match="El importe debe ser mayor a 0"):
         DebtAgentSchema(
@@ -55,6 +61,7 @@ def test_debt_agent_schema_0_amount_raises_error():
         )
 
 
+# U-07: Exception Testing
 def test_debt_agent_schema_invalid_date_format_raises_error():
     with pytest.raises(Exception, match="Fecha inválida"):
         DebtAgentSchema(
@@ -65,6 +72,7 @@ def test_debt_agent_schema_invalid_date_format_raises_error():
 
 # AssistantAgentSchema tests .--.-
 
+# U-08: Happy Path Testing
 def test_assistant_agent_schema_valid_request():
     request = "Tengo un problema con una de mis factoras de enero"
     schema = AssistantAgentSchema(request=request)
@@ -73,6 +81,7 @@ def test_assistant_agent_schema_valid_request():
     assert schema.is_valid_request() is True
 
 
+# U-09: Boundary Testing
 def test_assistant_agent_schema_invalid_request():
     schema = AssistantAgentSchema(request=None)
 
@@ -80,12 +89,14 @@ def test_assistant_agent_schema_invalid_request():
     assert schema.is_valid_request() is False
 
 
+# U-10: Boundary Testing
 def test_assistant_agent_schema_1000_characters_request_is_valid():
     schema = AssistantAgentSchema(request="a" * 1000)
 
     assert schema.is_valid_request() is True
 
 
+# U-11: Exception Testing
 def test_assistant_agent_schema_1001_characters_request_raises_error():
     with pytest.raises(Exception, match="La solicitud no puede tener más de 1000 caracteres"):
         AssistantAgentSchema(request="a" * 1001)
