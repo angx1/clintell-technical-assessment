@@ -25,7 +25,7 @@ El sistema implementa una arquitectura organizada en 4 capas: Modelos, Agentes, 
 
 1. **Patrón Template Method**: la clase abstracta `BaseAgent` define el flujo de gestión de turnos (`handle_turn()`) y las instancias `DebtAgent` y `AssistantAgent` implementan la especialización específica para la validación, normalización (`_validate_normalize()`) y el procesamiento (`_process_action()`) de la información que les llega. Esto garantiza la consistecia en su ciclo de vida y la posibilidad de añadir nuevos agentes sin duplicidad de código (Principio Apertura/Cierre).
 
-2. **Prevención de Información Duplicada**: Cada Agente tiene un `_action_history: set()` que guarda un record de entradas validadas con `frozenset()` para prevenir el procesamiento de información duplicada.
+2. **Prevención de Información Duplicada**: Cada Agente tiene un atributo `_action_history: set()` que guarda un registro de entradas validadas con `frozenset()` para prevenir el procesamiento de información duplicada.
 
 3. **Externalización de la Validación**: para desacoplar la validación de la información que les llega a los agentes se han implementado Schemas de validación con pydantic (Principio de Responsabilidad Única).
 
@@ -66,7 +66,7 @@ clintell-technical-assessment/
 
 ---
 
-### 5. Ejecutar demo local
+### 4. Ejecutar demo local
 
 **Requisitos**: Python 3.10+ (versión utilizada para el desarrollo: python 3.12)
 
@@ -91,14 +91,24 @@ python main.py
 
 La demo ejecuta dos escenarios simulados:
 
-- El primero es una simulación de la ejecución del `DebtAgent`, en el que se simula una conversación entre usuario-agente y se van logeando
+- El primero es una simulación de la ejecución del agente `DebtAgent`, en el que se "reproduce" una conversación entre usuario-agente y se van logeando
   los mensajes del usuario y el contexto interno (información parseada) del agente.
 
-- El segundo es la misma dinamica de simulación que antes pero para el `AssistantAgent`.
+- El segundo es la misma dinamica de simulación que se acaba de comentar pero para el agente `AssistantAgent`.
+
+**Output esperado:**
+
+```
+INFO - Starting assistant game loop (AssistantAgent demo)
+INFO - Turno 1 (USER input): Tengo un problema con una de mis factoras de enero
+INFO - POST request to: https://api.ringr.assistance/v1/request
+{'Authorization': 'Bearer ringr_test_token_9f3a2c1d', 'Content-Type': 'application/json', 'request': 'revisión de factura de enero'}
+INFO - Turno 1 (AGENT internal context): {'request': 'revisión de factura de enero'}
+```
 
 ---
 
-### 6. Tests
+### 5. Tests
 
 El proyecto incluye 27 tests distribuidos en tests unitarios y tests de integración:
 

@@ -19,7 +19,7 @@ class HttpClient:
             **parsed_data
         }
 
-        logging.info(f"POST request: {url} \n{headers} ")
+        logging.info(f"POST request to: {url} \n{headers} ")
         
         try:
             # response = requests.post(url, headers=headers, json=body)
